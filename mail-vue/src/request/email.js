@@ -14,7 +14,8 @@ export function emailLatest(emailId, accountId, allReceive) {
 }
 
 export function emailRead(emailIds) {
-    return http.put('/email/read', {emailIds})
+    const body = emailIds === 'all' ? { all: true } : { emailIds }
+    return http.put('/email/read', body)
 }
 
 export function emailSend(form,progress) {

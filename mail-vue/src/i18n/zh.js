@@ -376,6 +376,7 @@ const zh = {
     details: '详情',
     userDetails: '用户详情',
     markAsRead: '标为已读',
+    markAllRead: '全部已读',
     star: '星标',
     setRole: '设置权限',
     adminDeleteUser: '删除用户',

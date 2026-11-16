@@ -1497,8 +1497,10 @@ const emailService = {
 	},
 
 	async read(c, params, userId) {
-		const { emailIds } = params;
-		await orm(c).update(email).set({ unread: emailConst.unread.READ }).where(and(eq(email.userId, userId), inArray(email.emailId, emailIds)));
+		const { emailIds, all } = params;
+		const where = [eq(email.userId, userId), eq(email.unread, emailConst.unread.UNREAD)];
+		if (!all) where.push(inArray(email.emailId, emailIds));
+		await orm(c).update(email).set({ unread: emailConst.unread.READ }).where(and(...where));
 	}
 };
 

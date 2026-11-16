@@ -11,6 +11,7 @@
       <div class="header-left" :style="'padding-left:' + actionLeft">
 
         <Icon class="icon reload" icon="ion:reload" width="18" height="18" @click="refresh"/>
+        <button v-if="showUnread" type="button" class="read-all" @click="handleReadAll">{{ t('markAllRead') }}</button>
         <slot name="first"></slot>
         <Icon v-perm="'email:delete'" class="icon delete" icon="uiw:delete" width="16" height="16"
               v-if="getSelectedMailsIds().length > 0"
@@ -587,6 +588,13 @@ function starChange(email) {
   }
 }
 
+
+function handleReadAll() {
+  props.emailRead('all').then(() => {
+    emailList.forEach(item => { item.unread = EmailUnreadEnum.READ })
+    if (emailStore.contentData.email) emailStore.contentData.email.unread = EmailUnreadEnum.READ
+  })
+}
 
 const handleRead = () => {
   const emailIds = getSelectedMailsIds();
@@ -1374,6 +1382,13 @@ function renderHighlight(value) {
 
   .icon {
     font-size: 18px;
+    cursor: pointer;
+  }
+
+  .read-all {
+    padding: 0;
+    color: var(--el-text-color-primary);
+    font-size: 13px;
     cursor: pointer;
   }
 
