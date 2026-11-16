@@ -84,6 +84,7 @@ function updateContent() {
     content.appendChild(document.importNode(node, true))
   }
   content.querySelectorAll('script,iframe,object,embed,link,meta,base,frame').forEach((node) => node.remove())
+  content.querySelectorAll('img').forEach((img) => img.referrerPolicy = 'no-referrer')
 
   shadowRoot.replaceChildren(style, content)
 }
