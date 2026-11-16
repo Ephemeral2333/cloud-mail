@@ -7,7 +7,6 @@
                :star-cancel="starCancel"
                @jump="jumpContent"
                actionLeft="6px"
-               :show-account-icon="false"
                :show-first-loading="false"
                :showStar="false"
                @delete-draft="deleteDraft"

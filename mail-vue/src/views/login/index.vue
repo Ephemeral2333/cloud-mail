@@ -3,16 +3,9 @@
     <div class="oauth-loading" :class="oauthLoading ? 'loading-show' : 'loading-hide'">
       <loading/>
     </div>
-    <div id="background-wrap" v-if="!settingStore.settings.background">
-      <div class="x1 cloud"></div>
-      <div class="x2 cloud"></div>
-      <div class="x3 cloud"></div>
-      <div class="x4 cloud"></div>
-      <div class="x5 cloud"></div>
-    </div>
-    <div v-else :style="background"></div>
+    <div v-if="settingStore.settings.background" class="login-photo" :style="background"></div>
     <div class="form-wrapper">
-      <div class="container">
+        <div class="container" :class="{ 'container-photo': settingStore.settings.background }">
         <span class="form-title">{{ settingStore.settings.title }}</span>
         <span class="form-desc" v-if="show === 'login'">{{ $t('loginTitle') }}</span>
         <span class="form-desc" v-else>{{ $t('regTitle') }}</span>
@@ -150,7 +143,7 @@
       </div>
     </el-dialog>
     <a v-show="settingStore.settings.projectLink" class="github" href="https://github.com/maillab/cloud-mail">
-      <Icon icon="mingcute:github-line" color="#1890ff" width="20" height="20" />
+      <Icon icon="mingcute:github-line" width="20" height="20" />
     </a>
   </div>
 </template>
@@ -667,42 +660,30 @@ function submitRegister() {
 <style lang="scss" scoped>
 
 .form-wrapper {
-  position: fixed;
-  right: 0;
-  height: 100%;
+  position: relative;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  @media (max-width: 767px) {
-    width: 100%;
-  }
+  width: min(400px, calc(100% - 32px));
 }
 
 .container {
-  background: v-bind(loginOpacity);
-  padding-left: 40px;
-  padding-right: 40px;
+  background: #fff;
+  padding: 32px 28px 28px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 450px;
-  height: 100%;
-  border-left: 1px solid var(--login-border);
-  box-shadow: var(--el-box-shadow-light);
-  @media (max-width: 1024px) {
-    padding: 20px 18px;
-    width: 384px;
-    margin-left: 18px;
+  width: 100%;
+  height: auto;
+  border: 1px solid #e6e6ea;
+  border-radius: 16px;
+
+  &.container-photo {
+    background: v-bind(loginOpacity);
   }
   @media (max-width: 767px) {
-    border: 1px solid var(--login-border);
-    padding: 20px 18px;
-    border-radius: 6px;
-    height: fit-content;
-    width: 100%;
-    margin-right: 18px;
-    margin-left: 18px;
+    padding: 24px 18px;
   }
 
   .btn {
@@ -718,8 +699,9 @@ function submitRegister() {
   }
 
   .form-title {
-    font-weight: bold;
-    font-size: 22px !important;
+    font-weight: 600;
+    font-size: 28px !important;
+    letter-spacing: -0.03em;
   }
 
   .switch {
@@ -786,6 +768,7 @@ function submitRegister() {
   align-items: center;
   border-radius: 50%;
   background: var(--el-bg-color);
+  color: var(--el-color-primary);
   bottom: 10px;
   right: 10px;
   z-index: 1000;
@@ -855,88 +838,27 @@ function submitRegister() {
 
 #login-box {
   position: relative;
-  background: linear-gradient(to bottom, #2980b9, #6dd5fa, #fff);
-  font: 100% Arial, sans-serif;
+  background: #ececee;
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: hidden;
   display: grid;
-  grid-template-columns: 1fr;
+  place-items: center;
 }
 
-
-#background-wrap {
-  height: 100%;
-  z-index: 0;
-}
-
-@keyframes animateCloud {
-  0% {
-    margin-left: -500px;
-  }
-
-  100% {
-    margin-left: 100%;
-  }
-}
-
-.x1 {
-  animation: animateCloud 30s linear infinite;
-  transform: scale(0.65);
-}
-
-.x2 {
-  animation: animateCloud 15s linear infinite;
-  transform: scale(0.3);
-}
-
-.x3 {
-  animation: animateCloud 25s linear infinite;
-  transform: scale(0.5);
-}
-
-.x4 {
-  animation: animateCloud 13s linear infinite;
-  transform: scale(0.4);
-}
-
-.x5 {
-  animation: animateCloud 20s linear infinite;
-  transform: scale(0.55);
-}
-
-.cloud {
-  background: linear-gradient(to bottom, #fff 5%, #f1f1f1 100%);
-  border-radius: 100px;
-  box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
-  height: 120px;
-  width: 350px;
-  position: relative;
-}
-
-.cloud:after,
-.cloud:before {
-  content: "";
+.login-photo {
   position: absolute;
-  background: #fff;
-  z-index: -1;
+  inset: 0;
 }
 
-.cloud:after {
-  border-radius: 100px;
-  height: 100px;
-  left: 50px;
-  top: -50px;
-  width: 100px;
+:global(html.dark) #login-box {
+  background: #111113;
 }
 
-.cloud:before {
-  border-radius: 200px;
-  height: 180px;
-  width: 180px;
-  right: 50px;
-  top: -90px;
+:global(html.dark) .container {
+  background: #1c1c1e;
+  border-color: #2c2c2e;
 }
 
 </style>

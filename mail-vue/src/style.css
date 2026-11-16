@@ -105,36 +105,39 @@ button, input, select, textarea {
     max-height: 220px !important;
 }
 
-:root {
-    --el-color-primary: #1890ff;
-    --el-color-primary-dark-2: #1064c0;
-    --el-color-primary-light-3: #4dabff;
-    --el-color-primary-light-5: #69c0ff;
-    --el-color-primary-light-7: #91d5ff;
-    --el-color-primary-light-9: #e6f7ff;
+html:root {
+    --el-color-primary: #1c1c1e;
+    --el-color-primary-dark-2: #000000;
+    --el-color-primary-light-3: #5c5c60;
+    --el-color-primary-light-5: #8e8e93;
+    --el-color-primary-light-7: #d2d2d7;
+    --el-color-primary-light-8: #e8e8ed;
+    --el-color-primary-light-9: #f4f4f6;
 
-    --extra-light-fill: #FAFCFF;
-    --settings-page-background: #fafbfc;
-    --light-ill: #F5F7FA;
+    --extra-light-fill: #f6f6f7;
+    --settings-page-background: #f6f6f7;
+    --light-ill: #f2f2f4;
     --light-border: #E4E7ED;
     --header-actions-border: inset 0 -1px 0 0 var(--el-border-color-lighter);
-    --aside-backgound: #191A23;
-    --aside-menu-active-background: #27282D;
+    --aside-backgound: #f5f5f7;
+    --aside-menu-active-background: #e4e4e8;
+    --aside-text: #1c1c1e;
+    --aside-hover: rgba(0, 0, 0, 0.05);
     --loadding-background: rgba(255, 255, 255, 0.8);
     --dark-border: #CDD0D6;
-    --base-fill: #F0F2F5;
+    --base-fill: #ececef;
     --regular-text-color: #585d69;
     --light-border-color: #e7e9ec;
-    --aside-right-border: 3px 0 5px rgba(0, 21, 41, .35);
+    --aside-right-border: none;
     --choose-account-background: var(--el-color-primary-light-8);
     --el-text-color-regular: var(--el-text-color-primary);
     --email-scroll-content-color: rgba(25, 41, 59, 0.4);
     --search-hit-background: #ffe58f;
-    --email-hover-background: #F2F6FC;
+    --email-hover-background: #f3f3f5;
     --email-right-click-background: #FDF6EC;
     --login-border: none;
     --form-desc-color: #71717a;
-    --login-switch-color: #006be6;
+    --login-switch-color: #1c1c1e;
     --scrollbar-track-color: #A8ABB2;
     --base-border-color: #DCDFE6;
     --secondary-text-color: #909399;
@@ -146,7 +149,17 @@ button, input, select, textarea {
     --vt-easing: ease-out;
 }
 
-.dark {
+html.dark {
+    --el-color-primary: #f2f2f4;
+    --el-color-primary-dark-2: #ffffff;
+    --el-color-primary-light-3: #c7c7cc;
+    --el-color-primary-light-5: #8e8e93;
+    --el-color-primary-light-7: #3a3a3c;
+    --el-color-primary-light-8: #2c2c2e;
+    --el-color-primary-light-9: #1c1c1e;
+    --aside-text: #f5f5f7;
+    --aside-hover: rgba(255, 255, 255, 0.08);
+
     --extra-light-fill: #191919;
     --settings-page-background: var(--extra-light-fill);
     --light-ill: #262727;
@@ -167,12 +180,19 @@ button, input, select, textarea {
     --email-right-click-background: var(--email-hover-background);
     --login-border: none;
     --form-desc-color: #8D9095;
-    --login-switch-color: rgb(102, 177, 255);
+    --login-switch-color: #f2f2f4;
     --scrollbar-track-color: #8D9095;
     --base-border-color: #4C4D4F;
     --secondary-text-color: #A3A6AD;
     --message-block-color: rgba(30, 30, 30, 0.2);
     --el-border-color: #414243 !important;
+}
+
+html.dark .el-button--primary {
+    --el-button-text-color: #1c1c1e;
+    --el-button-hover-text-color: #1c1c1e;
+    --el-button-active-text-color: #1c1c1e;
+    --el-button-disabled-text-color: rgba(28, 28, 30, 0.45);
 }
 
 .el-input {

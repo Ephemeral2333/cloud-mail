@@ -22,8 +22,6 @@
 
       <div class="header-right">
         <span class="email-count" v-if="total">{{ $t('emailCount', {total: total}) }}</span>
-        <Icon v-if="showAccountIcon" class="more-icon icon" width="16" height="16" icon="akar-icons:dot-grid-fill"
-              @click="changeAccountShow"/>
       </div>
     </div>
 
@@ -38,7 +36,7 @@
                         :key="keyCount"
         >
           <template #default="{ data: item, index }" >
-            <div :class="['email-row', props.type, { 'right-checked': item.rightChecked }]"
+            <div :class="['email-row', props.type, { 'right-checked': item.rightChecked, 'is-unread': showUnread && item.unread === EmailUnreadEnum.UNREAD }]"
                  :data-checked="item.checked"
                  @click="jumpDetails(item)"
                  v-if="!item.expand"
@@ -54,7 +52,7 @@
                 <Icon v-else icon="solar:star-line-duotone" width="18" height="18"/>
               </div>
               <div v-if="!showStar"></div>
-              <div class="title" :class="accountShow ? 'title-column' : 'title-column'">
+              <div class="title title-column">
 
                 <div class="email-sender" :style=" (showStatus ? 'gap: 10px;' : '') + ((item.unread === EmailUnreadEnum.UNREAD && showUnread)  ? 'font-weight: bold' : '')">
                   <div class="email-status" v-if="showStatus">
@@ -115,7 +113,6 @@
             <skeletonBlock v-else-if="item.expand === 'loading'"
                            :rows="1"
                            :showStar="showStar"
-                           :accountShow="accountShow"
                            :showStatus="showStatus"
                            :showUserInfo="showUserInfo"
                            :type="type"/>
@@ -127,14 +124,12 @@
       <skeletonBlock v-if="firstLoad && showFirstLoading"
                        :rows="20"
                        :showStar="showStar"
-                       :accountShow="accountShow"
                        :showStatus="showStatus"
                        :showUserInfo="showUserInfo"
                        :type="type"/>
       <skeletonBlock v-if="loading"
                        :rows="skeletonRows"
                        :showStar="showStar"
-                       :accountShow="accountShow"
                        :showStatus="showStatus"
                        :showUserInfo="showUserInfo"
                        :type="type"/>
@@ -267,10 +262,6 @@ const props = defineProps({
   showStatus: {
     type: Boolean,
     default: false
-  },
-  showAccountIcon: {
-    type: Boolean,
-    default: true,
   },
   showUserInfo: {
     type: Boolean,
@@ -567,9 +558,6 @@ function getSkeletonRows() {
   skeletonRows = emailList.length
 }
 
-const accountShow = computed(() => {
-  return uiStore.accountShow && settingStore.settings.manyEmail === 0
-})
 
 function starChange(email) {
 
@@ -598,9 +586,6 @@ function starChange(email) {
   }
 }
 
-function changeAccountShow() {
-  uiStore.accountShow = !uiStore.accountShow;
-}
 
 const handleRead = () => {
   const emailIds = getSelectedMailsIds();
@@ -1385,10 +1370,6 @@ function renderHighlight(value) {
     margin-left: 2px;
   }
 
-  .more-icon {
-    margin-top: 8px;
-    margin-left: 15px;
-  }
 }
 
 .del-status {

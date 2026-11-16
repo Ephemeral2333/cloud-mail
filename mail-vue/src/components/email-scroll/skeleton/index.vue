@@ -7,7 +7,7 @@
         <Icon style="color: var(--el-border-color)" icon="solar:star-line-duotone" width="18" height="18"/>
       </div>
       <div v-if="!showStar"></div>
-      <div class="title" :class="accountShow ? 'title-column' : 'title-column'">
+      <div class="title title-column">
 
         <div class="email-sender">
           <div class="email-status" v-if="showStatus">
@@ -83,10 +83,6 @@ const props = defineProps({
   showStar: {
     type: Boolean,
     default: true
-  },
-  accountShow: {
-    type: Boolean,
-    default: false
   },
   showStatus: {
     type: Boolean,

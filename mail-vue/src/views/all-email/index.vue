@@ -9,7 +9,6 @@
                  show-user-info
                  show-status
                  actionLeft="4px"
-                 :show-account-icon="false"
                  :time-sort="params.timeSort"
                  :item-height="65"
                  @jump="jumpContent"

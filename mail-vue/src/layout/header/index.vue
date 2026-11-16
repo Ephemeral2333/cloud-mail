@@ -20,7 +20,6 @@
       v-if="showInboxSearch"
       :store="emailStore"
       :search-options="inboxSearchOptions"
-      :class="{ 'account-show': accountPanelShow }"
       @search="returnToList('email')"
       @reset="returnToList('email')"
     />
@@ -28,13 +27,11 @@
       v-else-if="showSentSearch"
       :store="sendStore"
       :search-options="sentSearchOptions"
-      :class="{ 'account-show': accountPanelShow }"
       @search="returnToList('send')"
       @reset="returnToList('send')"
     />
     <all-email-search
       v-else-if="showAllMailSearch"
-      :class="{ 'account-show': accountPanelShow }"
       @search="returnToList('all-email')"
       @reset="returnToList('all-email')"
     />
@@ -139,7 +136,6 @@ const sentSearchOptions = computed(() => [
   {label: t('searchSummaryContent'), type: 'content'},
   {label: t('searchRecipientAddress'), type: 'recipientAddress'},
 ])
-const accountPanelShow = computed(() => uiStore.accountShow && hasPerm('account:query'))
 const showInboxSearch = computed(() =>
   route.meta.name === 'email' || isMailboxDetail('inbox')
 )
@@ -516,7 +512,7 @@ onBeforeUnmount(() => {
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: 8px;
+      border-radius: 50%;
       border: 1px solid var(--dark-border);
     }
 

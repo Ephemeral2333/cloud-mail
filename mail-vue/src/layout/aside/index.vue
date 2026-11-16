@@ -9,7 +9,7 @@
         <Icon icon="hugeicons:quill-write-01" width="22" height="22" />
         <span>{{ $t('compose') }}</span>
       </button>
-      <el-menu :collapse="false" text-color="#fff" active-text-color="#fff" style="margin-top: 6px">
+      <el-menu :collapse="false" text-color="var(--aside-text)" active-text-color="var(--aside-text)" style="margin-top: 6px">
         <el-menu-item @click="router.push({name: 'email'})" index="email"
                       :class="route.meta.name === 'email' ? 'choose-item' : ''">
           <Icon icon="hugeicons:mailbox-01" width="20" height="20" />
@@ -114,7 +114,7 @@ function openCompose() {
   align-items: center;
   justify-content: flex-start;
   gap: 10px;
-  color: #ffffff;
+  color: var(--aside-text);
   transition: all 0.3s ease;
   max-width: 240px;
   padding: 0 10px;
@@ -137,7 +137,7 @@ function openCompose() {
     position: absolute;
     font-size: 12px;
     right: 8px;
-    color: #ffffff;
+    color: var(--aside-text);
   }
 
 }
@@ -160,7 +160,7 @@ function openCompose() {
   margin-bottom: 15px;
   border: 0;
   border-radius: 8px;
-  background: #1890ff;
+  background: #1c1c1e;
   color: #ffffff;
   font-family: inherit;
   font-size: 15px;
@@ -168,7 +168,7 @@ function openCompose() {
   cursor: pointer;
 
   &:hover {
-    background: #1064c0;
+    background: #000000;
   }
 
   @media (max-width: 767px) {
@@ -177,9 +177,11 @@ function openCompose() {
 }
 
 .manage-title {
-  margin-top: 12px;
-  padding-left: 20px;
-  color: #fff;
+  margin-top: 16px;
+  padding-left: 22px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--secondary-text-color);
 }
 
 .el-menu-item {
@@ -197,7 +199,16 @@ function openCompose() {
 
 @media (hover: hover) {
   .el-menu-item:hover {
-    background: rgba(255, 255, 255, 0.08) !important;
+    background: var(--aside-hover) !important;
+  }
+}
+
+:global(html.dark) .compose-bar {
+  background: #f2f2f4;
+  color: #1c1c1e;
+
+  &:hover {
+    background: #ffffff;
   }
 }
 
@@ -225,7 +236,7 @@ function openCompose() {
 
 :deep(.el-divider__text) {
   background: var(--aside-backgound);
-  color: #FFFFFF;
+  color: var(--aside-text);
 }
 
 .scroll {

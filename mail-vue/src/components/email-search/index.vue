@@ -294,11 +294,6 @@ onBeforeUnmount(() => {
   }
 }
 
-@media (min-width: 768px) {
-  .email-search.account-show {
-    left: 259px;
-  }
-}
 
 .search-placeholder {
   width: 100%;

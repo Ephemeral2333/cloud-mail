@@ -8,7 +8,6 @@
                :star-cancel="starCancel"
                @jump="jumpContent"
                actionLeft="6px"
-               :show-account-icon="false"
   />
 </template>
 

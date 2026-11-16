@@ -129,10 +129,10 @@ function changeDark(nextIsDark, origin) {
     gap: 8px;
     width: 28%;
     padding: 12px 6px;
-    background: #f0f1f3;
+    background: #f5f5f7;
 
     i:first-child {
-      background: #91caff;
+      background: #1c1c1e;
     }
   }
 
@@ -160,7 +160,7 @@ function changeDark(nextIsDark, origin) {
       background: #303236;
 
       i:first-child {
-        background: #409eff;
+        background: #f2f2f4;
       }
     }
   }

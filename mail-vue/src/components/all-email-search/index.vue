@@ -86,19 +86,13 @@
 
 <script setup>
 import {computed, onBeforeUnmount, onMounted, ref, watch} from 'vue'
-import {useRoute} from 'vue-router'
 import {Icon} from '@iconify/vue'
 import {useI18n} from 'vue-i18n'
 import {useAllEmailStore} from '@/store/all-email.js'
-import {useUiStore} from '@/store/ui.js'
 
 const {t} = useI18n()
 const emit = defineEmits(['search', 'reset'])
-const route = useRoute()
-const uiStore = useUiStore()
 const allEmailStore = useAllEmailStore()
-let alignFrame = 0
-let listObserver = null
 
 const searchOptions = computed(() => [
   {label: t('subject'), type: 'subject'},
@@ -293,75 +287,16 @@ function handleReset() {
   closeSearch()
 }
 
-function subjectAnchor() {
-  return document.querySelector('.email-row.all-email .email-subject')
-    || document.querySelector('.email-row.all-email .email-text-skeleton')
-}
-
-function alignSearch() {
-  const el = searchRef.value
-  if (!el) return
-  if (window.matchMedia('(max-width: 767px)').matches) {
-    el.style.left = ''
-    el.style.marginLeft = ''
-    el.style.width = ''
-    return
-  }
-
-  const anchor = subjectAnchor()
-  const header = el.offsetParent
-  if (!anchor || !header || typeof header.getBoundingClientRect !== 'function') return
-
-  const paddingLeft = parseFloat(getComputedStyle(anchor).paddingLeft) || 0
-  const skeletonOffset = anchor.classList.contains('email-text-skeleton') && window.innerWidth >= 1367 ? 5 : 0
-  const left = Math.round(
-    anchor.getBoundingClientRect().left + paddingLeft + skeletonOffset - header.getBoundingClientRect().left
-  ) - 5
-  const preferred = window.innerWidth <= 1080 ? 400 : 450
-  const width = Math.max(220, Math.min(preferred, header.clientWidth - left - 80))
-  el.style.marginLeft = '0'
-  el.style.left = `${left}px`
-  el.style.width = `${width}px`
-}
-
-function scheduleAlign() {
-  if (alignFrame) return
-  alignFrame = requestAnimationFrame(() => {
-    alignFrame = 0
-    alignSearch()
-  })
-}
-
-watch(() => uiStore.accountShow, () => {
-  scheduleAlign()
-  setTimeout(scheduleAlign, 150)
-})
-
-watch(() => route.fullPath, () => {
-  scheduleAlign()
-  setTimeout(scheduleAlign, 50)
-})
-
 onMounted(() => {
   document.addEventListener('click', handleDocumentClick, true)
   document.addEventListener('keydown', handleDocumentKeydown, true)
-  scheduleAlign()
-  setTimeout(scheduleAlign, 50)
-  setTimeout(scheduleAlign, 300)
-  window.addEventListener('resize', scheduleAlign)
-  const main = document.querySelector('.main-container')
-  if (main && typeof ResizeObserver !== 'undefined') {
-    listObserver = new ResizeObserver(() => scheduleAlign())
-    listObserver.observe(main)
-  }
+
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleDocumentClick, true)
   document.removeEventListener('keydown', handleDocumentKeydown, true)
-  window.removeEventListener('resize', scheduleAlign)
-  listObserver?.disconnect()
-  if (alignFrame) cancelAnimationFrame(alignFrame)
+
 })
 </script>
 
@@ -379,11 +314,6 @@ onBeforeUnmount(() => {
   }
 }
 
-@media (min-width: 768px) {
-  .all-email-search.account-show {
-    left: 259px;
-  }
-}
 
 .search-placeholder {
   width: 100%;

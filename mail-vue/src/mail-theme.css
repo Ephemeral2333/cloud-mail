@@ -1,0 +1,141 @@
+/* Shared mail surfaces. Row heights remain owned by the virtual list. */
+html:root {
+    --el-color-primary: #3568d4;
+    --el-color-primary-dark-2: #2854b3;
+    --el-color-primary-light-3: #7195e1;
+    --el-color-primary-light-5: #9bb5ea;
+    --el-color-primary-light-7: #c2d2f2;
+    --el-color-primary-light-8: #dce6fa;
+    --el-color-primary-light-9: #eef3fd;
+    --el-text-color-primary: #243248;
+    --el-text-color-regular: #48576b;
+    --el-text-color-secondary: #69788c;
+    --el-border-color: #dce3ed;
+    --el-border-color-light: #e5eaf2;
+    --el-border-color-lighter: #edf0f5;
+    --el-fill-color-light: #f1f4f9;
+    --el-bg-color: #ffffff;
+    --el-border-radius-base: 8px;
+    --aside-backgound: #f3f6fb;
+    --aside-text: #48576b;
+    --aside-menu-active-background: #e0eafb;
+    --aside-hover: #e9eef7;
+    --extra-light-fill: #f6f8fc;
+    --settings-page-background: #f6f8fc;
+    --base-fill: #eaf0f8;
+    --regular-text-color: #56667c;
+    --secondary-text-color: #69788c;
+    --email-scroll-content-color: #718096;
+    --email-hover-background: #edf3fd;
+    --email-right-click-background: #e0eafb;
+    --choose-account-background: #e7effd;
+    --light-border-color: #e5eaf2;
+    --form-desc-color: #69788c;
+    --login-switch-color: #3568d4;
+    --mail-canvas: #f3f6fb;
+    --mail-unread: #f5f8fe;
+    --mail-shadow: 0 4px 24px rgb(36 50 72 / 4%);
+}
+
+html.dark {
+    --el-color-primary: #8aafff;
+    --el-color-primary-dark-2: #aac5ff;
+    --el-color-primary-light-3: #7193d9;
+    --el-color-primary-light-5: #556e9e;
+    --el-color-primary-light-7: #364867;
+    --el-color-primary-light-8: #293a56;
+    --el-color-primary-light-9: #202e44;
+    --el-text-color-primary: #e1e8f4;
+    --el-text-color-regular: #b8c4d6;
+    --el-text-color-secondary: #9aa9bf;
+    --el-bg-color: #182231;
+    --el-bg-color-overlay: #1d293b;
+    --el-fill-color-light: #222f42;
+    --el-border-color: #334156 !important;
+    --el-border-color-light: #2b394d;
+    --el-border-color-lighter: #263448;
+    --aside-backgound: #131d2b;
+    --aside-text: #b8c4d6;
+    --aside-menu-active-background: #263b60;
+    --aside-hover: #202e43;
+    --extra-light-fill: #141e2c;
+    --base-fill: #263448;
+    --regular-text-color: #b8c4d6;
+    --secondary-text-color: #9aa9bf;
+    --email-scroll-content-color: #9aa9bf;
+    --email-hover-background: #233550;
+    --email-right-click-background: #2a4164;
+    --choose-account-background: #263b60;
+    --light-border-color: #2b394d;
+    --form-desc-color: #9aa9bf;
+    --login-switch-color: #8aafff;
+    --mail-canvas: #131d2b;
+    --mail-unread: #1c2a3e;
+    --mail-shadow: none;
+}
+
+body { -webkit-font-smoothing: antialiased; }
+:is(button, a, input, [tabindex]):focus-visible {
+    outline: 2px solid var(--el-color-primary);
+    outline-offset: 3px;
+}
+.layout .main-container { min-width: 0; background: var(--mail-canvas); }
+.layout .el-main { min-width: 0; overflow: hidden; }
+.layout .el-header { border-bottom-color: var(--el-border-color-lighter); }
+.layout .header { padding: 0 16px 0 4px; }
+.layout .breadcrumb-item { font-size: 16px; font-weight: 650; letter-spacing: -.02em; }
+.layout .aside-show { border-right: 0; background: var(--aside-backgound); }
+.layout .aside .title { margin: 16px 12px 20px; gap: 12px; }
+.layout .aside .title .logo { width: 32px; height: 32px; }
+.layout .aside .el-menu-item { height: 42px; border-radius: 9px; margin: 4px 14px !important; }
+.layout .aside .choose-item { color: var(--el-color-primary); font-weight: 600; }
+.layout .aside .manage-title { margin-top: 28px; padding: 0 24px 8px; font-weight: 600; }
+.layout .aside .compose-bar {
+    display: flex; align-items: center; justify-content: flex-start; gap: 12px;
+    width: calc(100% - 32px); margin: 0 16px 20px; padding: 0 18px;
+    height: 48px; border-radius: 12px; background: var(--el-color-primary);
+    color: #fff; font-weight: 600; cursor: pointer;
+    box-shadow: 0 4px 10px rgb(53 104 212 / 16%);
+    transition: background .15s;
+}
+.layout .aside .compose-bar:hover { background: var(--el-color-primary-dark-2); }
+html.dark .layout .aside .compose-bar { color: #14223c; }
+.layout .header .avatar-text { background: var(--aside-menu-active-background); border: 0; color: var(--el-color-primary); font-weight: 650; }
+
+/* Search participates in header layout instead of covering the page title. */
+@media (min-width: 768px) {
+    .layout .el-header .header { display: flex; align-items: center; gap: 24px; }
+    .layout .header-btn { flex: 0 0 auto; }
+    .layout .header :is(.email-search, .all-email-search) {
+        position: relative; inset: auto; transform: none; flex: 0 1 540px;
+        width: auto; min-width: 180px; height: 40px;
+    }
+    .layout .header .toolbar { margin-left: auto; }
+    .layout .header .search-placeholder { height: 40px; border-radius: 10px; padding: 0 14px; gap: 12px; }
+    .layout .header .search-placeholder-text { font-size: 14px; }
+    .layout .main-box { padding: 12px 16px 16px; }
+    .layout .main-view { min-width: 0; border: 1px solid var(--el-border-color-lighter); border-radius: 12px; box-shadow: var(--mail-shadow); overflow: auto; }
+}
+.layout .email-container { overflow: hidden; }
+.layout .email-container .header-actions { border-bottom: 1px solid var(--el-border-color-lighter); box-shadow: none; }
+.layout .email-row .title { min-width: 0; }
+.layout .email-row .email-time,
+.layout .email-row .phone-time { color: var(--secondary-text-color); font-variant-numeric: tabular-nums; }
+.layout .email-row.is-unread { background: var(--mail-unread); }
+.layout .email-row.is-unread:hover { background: var(--email-hover-background); }
+.layout .email-row[data-checked="true"] { background: var(--choose-account-background); }
+.layout .email-row .unread { background: var(--el-color-primary); }
+.layout .email-row .pc-star { color: var(--secondary-text-color); }
+.layout .email-container .email-count { color: var(--secondary-text-color); font-size: 12px; }
+.el-dialog { border-radius: 14px; }
+.el-button { font-weight: 500; }
+#login-box .form-wrapper .container { border-radius: 20px; border: 1px solid var(--el-border-color-lighter); box-shadow: var(--mail-shadow); }
+#login-box .form-title { letter-spacing: -.03em; }
+@media (max-width: 767px) {
+    .layout .header { padding-right: 8px; gap: 8px; }
+    .layout .main-view { min-width: 0; }
+    .layout .header .search-panel-shell { position: absolute; top: calc(100% + 8px); left: 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0s !important; animation-duration: 0s !important; }
+}
