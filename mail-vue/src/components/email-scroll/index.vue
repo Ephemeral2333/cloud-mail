@@ -82,6 +82,7 @@
                     <span class="email-subject" :style="(item.unread === EmailUnreadEnum.UNREAD && showUnread)  ? 'font-weight: bold' : ''">
                       <div class="unread" v-if="!isMobile && (item.unread === EmailUnreadEnum.UNREAD && showUnread) "/>
                       <span v-if="item.code" class="code-tag" @click.stop="copyCode(item.code)">[{{ t('codeLabel') }}{{ item.code }}]</span>
+                      <span v-if="item.type === 0 && item.toEmail" class="to-email">{{ item.toEmail }}</span>
                       <span class="subject-text">
                         <slot name="subject" :email="item" >
                           <span v-html="item.subjectHtml"></span>
@@ -1223,6 +1224,16 @@ function renderHighlight(value) {
         @media (min-width: 1367px) {
           padding-left: 5px;
         }
+      }
+
+      .to-email {
+        flex: 0 0 auto;
+        max-width: 220px;
+        overflow: hidden;
+        color: var(--secondary-text-color);
+        font-size: 12px;
+        font-weight: 400;
+        text-overflow: ellipsis;
       }
 
       .code-tag {
